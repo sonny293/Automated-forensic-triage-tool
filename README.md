@@ -1,2 +1,2 @@
 # Automated-forensic-triage-tool
-Automated forensic triage tool for computer systems.
+Automated forensic triage tool for computer systems (Windows).
