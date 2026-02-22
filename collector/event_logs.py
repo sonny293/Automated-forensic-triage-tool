@@ -12,6 +12,9 @@ Result = subprocess.run(['pwd'], capture_output=True, text=True, shell=True)
 ExportLocation = Result.stdout.strip()
 """
 # collects current directory and joins it to file name for export location
+"""
+change to appropriate location
+"""
 CurrentDir = Path.cwd()
 path = CurrentDir / "security.evtx"
 
@@ -24,4 +27,5 @@ subprocess.run(
 
 
 if __name__ == "__main__":
-    print('hi')
+    print('running directely')
+    #main()
