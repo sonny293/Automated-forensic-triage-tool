@@ -15,17 +15,23 @@ ExportLocation = Result.stdout.strip()
 """
 change to appropriate location
 """
-CurrentDir = Path.cwd()
-path = CurrentDir / "security.evtx"
+
+def file_path():
+    base_dir = Path("Logs/security.evtx")
+    path = base_dir.resolve()
+    return path
 
 # run 'wevtutil' shell command with current location to export security logs
-subprocess.run(
-    ["wevtutil", "epl", "Security", str(path)],
-    check=True
-)
-
+def wev_run(path):
+    subprocess.run(
+        ["wevtutil", "epl", "Security", str(path)],
+        check=True
+    )
+def main():
+    path = file_path()
+    print(path)
+    wev_run(path)
 
 
 if __name__ == "__main__":
-    print('running directely')
-    #main()
+    main()
