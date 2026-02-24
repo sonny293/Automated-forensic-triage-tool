@@ -6,13 +6,10 @@ from Evtx.Evtx import Evtx
 from pathlib import Path
 import xmltodict
 import json
-import os
 from pathlib import Path
 import time
 import logging
 from datetime import datetime
-import sys
-from tqdm import tqdm 
 
 #loggin
 
