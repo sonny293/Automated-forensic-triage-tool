@@ -25,18 +25,18 @@ def file_path():
     return path
 
 path = file_path()
-#path = r"/Users/sonnybowers/Documents/University/Group Project/AFTT/main/Automated-forensic-triage-tool/collector/Logs/security.evtx"
+#path = r"/Users/sonnybowers/Documents/University/Group Project/AFTT/main/Automated-forensic-triage-tool/collector/Logs/time_takenurity.evtx"
 
 def main(path):
-    logging.debug("Loading Windows Security Event Log")
+    logging.debug("Loading Windows security.evtx Event Log")
     Artifact_count=0  
     Failed_count=0
     with Evtx(path) as log, open("Security_failed_logins.json", "w", encoding="utf-8") as f:
         logging.debug("Converting Event Log Into JSON Dictionay\n")   
         for record in log.records():
+            Artifact_count+=1
             print(f"\rArtifacts Processed: {Artifact_count}", end="", flush=True)
             #logging.info(f"Artifact:{Artifact_count} Processing")
-            Artifact_count+=1
             xml_str = record.xml()
 
             # Convert XML string to Python dict
@@ -68,11 +68,19 @@ def main(path):
 
 
 if __name__ == "__main__":
-    print('')
     start = time.time()
     main(path)
     end = time.time()
-    print(f"Time Taken: {round(end - start, 3)} sec")
+    time_taken= end - start
+
+    hour = int(time_taken // 3600)
+    remaining = time_taken % 3600
+
+    min = int(remaining // 60)
+    time_taken = remaining % 60
+
+    print(f"Time Taken:\nSeconds:{round(time_taken, 3)} Mins:{min} Hours:{hour}")
+
  
 
    
