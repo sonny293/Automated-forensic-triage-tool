@@ -29,9 +29,8 @@ def wev_run(path):
 
 def main():
     path = file_path()
-    print(path)
     wev_run(path)
-    logging.debug(f"Complete Extraction - stored in: {path}")
+    logging.debug(f"Complete Extraction - \nstored in: {path}")
 
 
 if __name__ == "__main__":
