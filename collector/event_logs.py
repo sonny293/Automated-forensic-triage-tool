@@ -15,22 +15,31 @@ logging.basicConfig(
 
 def file_path():
     base_dir = Path("Logs/security.evtx")
-    path = base_dir.resolve()
-    return path
+    try:
+        path = base_dir.resolve()
+    except Exception as error:
+        print(f'Error occured:{error}') 
+        exit()
+    else:
+        return path   
 
 # run 'wevtutil' shell command with current location to export security logs
 
 def wev_run(path):
-    logging.debug("Extracting 'security.evtx' from Event Logs")
-    subprocess.run(
-        ["wevtutil", "epl", "Security", str(path)],
-        check=True
-    )
+    try:
+        logging.debug("Extracting 'security.evtx' from Event Logs")
+        subprocess.run(
+            ["wevtutil", "epl", "Security", str(path)],
+            check=True
+        )
+        logging.debug(f"Complete Extraction - \nstored in: {path}")
+    except Exception as error:
+        print(f'Error occured:{error}')
+        exit()
 
 def main():
     path = file_path()
     wev_run(path)
-    logging.debug(f"Complete Extraction - \nstored in: {path}")
 
 
 if __name__ == "__main__":
