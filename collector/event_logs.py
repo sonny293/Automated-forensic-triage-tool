@@ -52,15 +52,14 @@ def wev_run(evtx_file):
             logging.error("%s", "[HINT] - Run the program with higher privileges")   
         
             logging.info("%s", "If you want to re-run the program enter ('r') or ('q')")
-                rerun = input("Enter: ")
-                if rerun == 'r':
-                    subprocess.run(
-                    ["rm", "collector\Logs\security.evtx"],
-                    check=True
-                )
-                    pass
-                else:
-                    exit() 
+            rerun = input("Enter: ")
+            if rerun.lower() == 'r':
+                subprocess.run(
+                ["rm", "collector\Logs\security.evtx"],
+                check=True)
+                pass
+            else:
+                exit() 
 
 def main():
     evtx_file = file_path()
