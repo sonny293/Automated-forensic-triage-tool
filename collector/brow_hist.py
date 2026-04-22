@@ -40,8 +40,10 @@ def path():
 def write_history(results, output_path):
     if not results:
         logging.info("No history results to write.")
+        empty='Empty '
         history = {"History": []}
     else:
+        empty=''
         history = {
             "History": [
                 {
@@ -56,7 +58,7 @@ def write_history(results, output_path):
     try:
         with open(output_path, "w", encoding="utf-8") as f:
             json.dump(history, f, indent=2, default=str)
-            logging.info("Chrome Browser History JSON report written")
+            logging.info(f"{empty}Chrome Browser History JSON report written")
             logging.info(output_path)
     except Exception as e:
         logging.error(f"Error writing JSON: {e}")

@@ -28,27 +28,39 @@ def file_path():
 
 # run 'wevtutil' shell command with current location to export security logs
 def wev_run(evtx_file):
-    try:
-        #runs wevutil - windows tool for exporting event logs
-        subprocess.run(
-            ["wevtutil", "epl", "Security", str(evtx_file)],
-            check=True
-        )
-        logging.debug("Attempting extraction of 'security.evtx' from Windows Event Logs")
-        logging.debug(f"Complete Extraction - \nstored in: {evtx_file}")
-    except FileNotFoundError as e:   
-        logging.error("%s", e)
-        logging.error("%s", "[HINT] - 'wevutil can only be run on windows")
-    except PermissionError as e:
-        logging.error("%s", e)
-        logging.error("%s", "[HINT] - Run the program with higher privileges")
-    except FileExistsError as e:
-        logging.error("%s", e)
-        logging.error("%s", "[HINT] - Security.evtx already exists in '/collector/Logs'")
-        pass
-    except Exception as error:
-        logging.error(error)
-        exit()
+    while True:
+        try:
+            #runs wevutil - windows tool for exporting event logs
+            subprocess.run(
+                ["wevtutil", "epl", "Security", str(evtx_file)],
+                check=True
+            )
+            logging.debug("Attempting extraction of 'security.evtx' from Windows Event Logs")
+            logging.debug(f"Complete Extraction - \nstored in: {evtx_file}")
+        except FileNotFoundError as e:   
+            logging.error("%s", e)
+            logging.error("%s", "[HINT] - 'wevutil can only be run on windows")
+        except PermissionError as e:
+            logging.error("%s", e)
+            logging.error("%s", "[HINT] - Run the program with higher privileges")
+        except FileExistsError as e:
+            logging.error("%s", e)
+            logging.error("%s", "[HINT] - Security.evtx already exists in '/collector/Logs'")
+            pass
+        except Exception as error:
+            logging.error(error)
+            logging.error("%s", "[HINT] - Run the program with higher privileges")   
+        
+            logging.info("%s", "If you want to re-run the program enter ('r') or ('q')")
+                rerun = input("Enter: ")
+                if rerun == 'r':
+                    subprocess.run(
+                    ["rm", "collector\Logs\security.evtx"],
+                    check=True
+                )
+                    pass
+                else:
+                    exit() 
 
 def main():
     evtx_file = file_path()
