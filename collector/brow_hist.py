@@ -12,13 +12,18 @@ from pathlib import Path
 logging.basicConfig(level=logging.DEBUG, format="%(asctime)s - %(levelname)s - %(message)s")
 
 def get_history():
-    db_path = os.path.expanduser('~/.config/google-chrome/Default/History')
+    #ubuntu linux
+    #db_path = os.path.expanduser('~/.config/google-chrome/Default/History')
+    #windows
+    db_path = os.path.expanduser('~\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\History')
     try:
         with sqlite3.connect(db_path) as con:
             c = con.cursor()
             c.execute("SELECT url, title, visit_count, last_visit_time FROM urls")
             results = c.fetchall()
+            logging.info("Chrome History collected Succesfully")
             return results
+            
     except Exception as e:
         logging.error(f"[Error] get_history failed: {e}")
         return []
@@ -50,7 +55,8 @@ def write_history(results, output_path):
     try:
         with open(output_path, "w", encoding="utf-8") as f:
             json.dump(history, f, indent=2, default=str)
-            logging.info("JSON report written")
+            logging.info("Chrome Browser History JSON report written")
+            logging.info(output_path)
     except Exception as e:
         logging.error(f"Error writing JSON: {e}")
 

@@ -38,7 +38,11 @@ def wev_run(evtx_file):
         logging.debug(f"Complete Extraction - \nstored in: {evtx_file}")
     except FileNotFoundError as e:   
         logging.error("%s", e)
-        logging.error("%s", "[HINT] - 'wevutil can only be run on windows") 
+        logging.error("%s", "[HINT] - 'wevutil can only be run on windows")
+    except FileExistsError as e:
+        logging.error("%s", e)
+        logging.error("%s", "[HINT] - Security.evtx already exists in '/collector/Logs'")
+        break
     except Exception as error:
         logging.error(error)
         exit()
