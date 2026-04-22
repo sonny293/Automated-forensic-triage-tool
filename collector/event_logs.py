@@ -42,7 +42,7 @@ def wev_run(evtx_file):
     except FileExistsError as e:
         logging.error("%s", e)
         logging.error("%s", "[HINT] - Security.evtx already exists in '/collector/Logs'")
-        continue
+        pass
     except Exception as error:
         logging.error(error)
         exit()
