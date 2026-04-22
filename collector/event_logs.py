@@ -49,9 +49,9 @@ def wev_run(evtx_file):
             pass
         except Exception as error:
             logging.error(error)
-            logging.error("%s", "[HINT] - Run the program with higher privileges")   
+            logging.error("%s", "[HINT] - Make sure you run the program with enough privileges")   
         
-            logging.info("%s", "If you want to re-run the program enter ('r') or ('q')")
+            logging.info("%s", "if you are running the program for a second time enter ('r') or ('q')")
             rerun = input("Enter: ")
             if rerun.lower() == 'r':
                 subprocess.run(
