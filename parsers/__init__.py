@@ -2,8 +2,16 @@
 parser package initializer.
 Exposes high-level collection functions.
 """
+from .pathing import path_find
+from .parser import file_parser
+from .scoring import scoring
+from .report import write_json_report
+from .timer import timer
 
-import evtx
+__all__ = ["path_find", "file_parser", "scoring", "write_json_report", "timer"]
+
+
+
 
 
 def open_evtx(input_file):
