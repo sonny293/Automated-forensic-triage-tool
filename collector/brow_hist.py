@@ -26,6 +26,7 @@ def get_history():
             
     except Exception as e:
         logging.error(f"[Error] get_history failed: {e}")
+        logging.error("[HINT] - Make sure chrome is not open when running")
         return []
 
 def path():

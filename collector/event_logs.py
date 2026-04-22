@@ -39,6 +39,9 @@ def wev_run(evtx_file):
     except FileNotFoundError as e:   
         logging.error("%s", e)
         logging.error("%s", "[HINT] - 'wevutil can only be run on windows")
+    except PermissionError as e:
+        logging.error("%s", e)
+        logging.error("%s", "[HINT] - Run the program with higher privileges")
     except FileExistsError as e:
         logging.error("%s", e)
         logging.error("%s", "[HINT] - Security.evtx already exists in '/collector/Logs'")
