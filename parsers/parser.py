@@ -88,7 +88,7 @@ def file_parser(evtx_path, attempts_output_path):
                         #acceses account and ip or sets to unkown if missing
                         account = data_list[5]["#text"] if data_list else "Unknown"
                         ip_address = data_list[19]["#text"] if data_list else "Unknown"
-
+                        source_type = 'local' if ip_address.startswith('127.') else 'remote'
                         #stores timestamp of ip addres and or adds a new ip if one apears
                         filtered_artifacts[ip_address].append(time_created)
 
@@ -98,14 +98,16 @@ def file_parser(evtx_path, attempts_output_path):
                             "SystemTime": system_time,
                             "Account": account,
                             "IPAddress": ip_address,
+                            'Source': source_type,
                         }
                         #saves and writes json data to file
                         raw_events.append(event_record)
                         f.write(json.dumps(event_record) + "\n")
 
                         #logs failed logins with details
-                        logging.info(f"Failed login #{failed_count}: Account={account}, IP={ip_address}, Time={system_time}")
+                        logging.info(f"Failed login #{failed_count}: Account={account}, IP={ip_address} Source={source_type}, Time={system_time}")
 
+                    """
                     if event_id == "4624":
                         succesful_count += 1
 
@@ -131,6 +133,7 @@ def file_parser(evtx_path, attempts_output_path):
 
                         #logs succesfull logins with details
                         #logging.info(f"Succesfull login #{succesful_count}: Account={account}, IP={ip_address}, Time={system_time}")
+                    """
                     #counts processed events
                     print(f"\rEvent logs processed: {artifact_count}", end="", flush=True)
 
