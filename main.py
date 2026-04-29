@@ -9,7 +9,7 @@ imports all other scripts and runs them in correct order
 from collector.event_logs import wev_run, file_path
 from collector.brow_hist import get_history, path, write_history
 from utils.logger import log_setup
-from parsers import path_find, file_parser, scoring, write_json_report, timer, search_history, brow_report
+from parsers import path_find, file_parser, scoring, write_json_report, timer, search_history, brow_report, brow_path_find
 
 
 #Standard
