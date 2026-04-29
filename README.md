@@ -23,26 +23,7 @@ The tool performs **read-only artefact collection**, applies **simple rule-based
 - Rule-based identification of potentially suspicious artifacts
 - structured triage reports
 - audit logging
-
----
-
-## Artefacts in Scope
-
-The current scope focuses on artefacts that provide high investigative value during early triage:
-
-- **Windows Event Logs**  
-  Security and System logs for authentication events, system activity, and errors
-
-- **USB & Removable Media History**  
-  Registry-based artefacts indicating device connections and timestamps
-
-- **User Activity Artefacts**  
-  Registry and system artefacts related to user sessions and activity
-
-- **Browser History (limited scope)**  
-  Supported browsers only (initially limited to a single, widely used browser)
-
-Additional artefacts may be added if they can be supported without expanding scope beyond triage.
+- browser history extraction and parsing (chrome)
 
 ---
 
@@ -61,6 +42,28 @@ The tool generates:
 Reports are designed for **rapid human interpretation**, not automated decision-making.
 
 ---
+
+## Installation Requirements
+- Windows 10 or later
+- Python 3.8+
+- Git
+
+## Install steps
+Open PowerShell or Command Prompt.
+Clone the repository and change into it:
+git clone https://github.com/sonny293/Automated-forensic-triage-tool
+cd Automated-forensic-triage-tool
+
+Install dependencies:
+run:
+pip install -r requirements.txt
+
+
+## Usage
+CLI entrypoint
+Run the tool from the repository root:
+python -m main.py
+
 
 ## Current Status
 
