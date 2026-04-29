@@ -51,19 +51,23 @@ Reports are designed for **rapid human interpretation**, not automated decision-
 ## Install steps
 Open PowerShell or Command Prompt.
 Clone the repository and change into it:
+```
 git clone https://github.com/sonny293/Automated-forensic-triage-tool
 cd Automated-forensic-triage-tool
+```
 
 Install dependencies:
 run:
+```
 pip install -r requirements.txt
-
+```
 
 ## Usage
 CLI entrypoint
 Run the tool from the repository root:
+```
 python -m main.py
-
+```
 
 ## Current Status
 
