@@ -36,22 +36,9 @@ def main():
     try:
         rprint(f"[white on rgb(0,0,143)][bold]{banner}\n Automated Forensics Triage Tool                   \n[/white on rgb(0,0,143)][/bold][white on rgb(0,0,50)][italic] By Sonny Bowers & Jane Rewnwick                   \n[white on rgb(0,0,50)][italic]")
         while True:
-            start = console.input("[bold]Start program: [/bold]")
-            if start == 'yes':
-
-                log_setup()
-
-                
-                try:
-                    results = get_history()
-                    output_path = path()
-                    write_history(results, output_path)
-                except FileNotFoundError:
-                    logging.error('[red]History not found[/red]')
-                    results, output_path = [], '/tmp/history.json'
-                except Exception as e:
-                    logging.exception(f'[red]{e} \n[/red]')
-                
+            log_setup()
+            start = console.input("Scan Security Event Logs (1)\nScan Chrome Browser History (2)\n\nEnter: ")
+            if start == '1':
                 try:
                     evtx_file = file_path()
                 except Exception as e:
@@ -61,7 +48,7 @@ def main():
                     wev_run(evtx_file)
                 except FileNotFoundError as e:
                     logging.error("%s", e)
-                    logging.info("%s", "[HINT] - 'wevutil can only be run on windows[/red]")
+                    logging.info("%s", "[HINT] - 'wevutil can only be run on windows")
                 except Exception as e:
                     logging.error("%s", e)
 
@@ -96,7 +83,10 @@ def main():
 
                 # Parsing phase
                 parse_start = time.time()
-                filtered_artifacts, raw_events, failed_count = file_parser(evtx_path, attempts_output_path)
+                try:
+                    filtered_artifacts, raw_events, failed_count = file_parser(evtx_path, attempts_output_path)
+                except Exception as e:
+                    loggin.error("%s", e)
                 parse_end = time.time()
                 parse_secs, parse_mins, parse_hrs = timer(parse_start, parse_end)
 
@@ -126,6 +116,20 @@ def main():
                 sleep(1)
                 write_json_report(raw_events, risky_ips, risk_threshold, time_window_minutes, total_elapsed, report_output_path)
                 exit()
+
+
+            elif start == '2':                
+                try:
+                    results = get_history()
+                    output_path = path()
+                    write_history(results, output_path)
+                except FileNotFoundError:
+                    logging.error('History not found[')
+                    results, output_path = [], '/tmp/history.json'
+                except Exception as e:
+                    logging.exception(f'{e} \n')
+                
+
             else:
                 exit()
     except KeyboardInterrupt:
