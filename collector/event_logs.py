@@ -56,7 +56,7 @@ def wev_run(evtx_file):
 
         if rerun.lower() == 'r':
             subprocess.run(
-            ["rm", r"collector\Logs\security.evtx"],
+            ["rm", str(evtx_file)],
             check=True)
             pass
         else:
