@@ -124,8 +124,8 @@ def main():
                     output_path = path()
                     write_history(results, output_path)
                     paths = brow_path_find()
-                    browser_path = paths[3]
-                    browser_output_path = paths[4]
+                    browser_path = paths[0]
+                    browser_output_path = paths[1]
                     print(browser_path)
 
                     keyword = input('\nWhat Keyword would you like to search for: ')
