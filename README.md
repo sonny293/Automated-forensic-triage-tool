@@ -57,7 +57,6 @@ cd Automated-forensic-triage-tool
 ```
 
 Install dependencies:
-run:
 ```
 pip install -r requirements.txt
 ```
