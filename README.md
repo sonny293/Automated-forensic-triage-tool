@@ -25,20 +25,6 @@ The tool performs **read-only artefact collection**, applies **simple rule-based
 - audit logging
 - browser history extraction and parsing (chrome)
 
----
-
-## Output
-
-The tool generates:
-- A structured triage report summarising:
-  - Collected artefacts
-  - Observed data
-  - Flagged indicators
-- An audit log detailing:
-  - Tool actions
-  - Timestamps
-  - Successes and failures
-
 Reports are designed for **rapid human interpretation**, not automated decision-making.
 
 ---
@@ -67,6 +53,20 @@ Run the tool from the repository root:
 ```
 python -m main.py
 ```
+
+---
+## Output
+
+The tool generates:
+- A structured triage report summarising:
+  - Collected artefacts
+  - Observed data
+  - Flagged indicators
+- An audit log detailing:
+  - Tool actions
+  - Timestamps
+  - Successes and failures
+
 
 ## Current Status
 
