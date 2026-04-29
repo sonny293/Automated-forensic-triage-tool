@@ -89,8 +89,13 @@ def file_parser(evtx_path, attempts_output_path):
                         #acceses account and ip or sets to unkown if missing
                         account = data_list[5]["#text"] if data_list else "Unknown"
                         ip_address = data_list[19]["#text"] if data_list else "Unknown"
-                        source_type = 'local' if ip_address.startswith('127.') else 'remote'
-                        source_type = 'unkown' if ip_address.startswith('-') else 'remote'
+                        if ip_address.startswith('127.'):
+                            source_type = 'local'
+                        elif ip_address.startswith('-'):
+                            source_type = 'unkown'
+                        else:
+                            source_type = 'remote'
+                            
                         #stores timestamp of ip addres and or adds a new ip if one apears
                         filtered_artifacts[ip_address].append(time_created)
 
