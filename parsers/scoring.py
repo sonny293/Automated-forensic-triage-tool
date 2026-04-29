@@ -83,7 +83,7 @@ def scoring(filtered_artifacts, risk_threshold, time_window_minutes=5):
                     "priority": priority,
                 }
 
-            logging.info(
+        logging.info(
                 f"High={high_count}, Medium={medium_count}, Low={low_count}\n"
                 f"\nIP's Evaluated: {total_ips}"
             )
