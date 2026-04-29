@@ -123,7 +123,7 @@ def main():
                     results = get_history()
                     output_path = path()
                     write_history(results, output_path)
-                    paths = path_find()
+                    paths = brow_path_find()
                     browser_path = paths[3]
                     browser_output_path = paths[4]
                     print(browser_path)

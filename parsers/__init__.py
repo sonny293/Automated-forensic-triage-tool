@@ -2,7 +2,7 @@
 parser package initializer.
 Exposes high-level collection functions.
 """
-from .pathing import path_find
+from .pathing import path_find, brow_path_find
 from .parser import file_parser
 from .scoring import scoring
 from .report import write_json_report
