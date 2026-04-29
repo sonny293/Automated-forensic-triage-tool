@@ -38,6 +38,7 @@ from rich.console import Console
 console = Console()
 
 def file_parser(evtx_path, attempts_output_path):
+
     try:    
         print('')
         rprint("[bold][rgb(93,0,255)]========= Parsing Event Logs ======================[/rgb(93,0,255)][/bold]")
@@ -89,6 +90,7 @@ def file_parser(evtx_path, attempts_output_path):
                         account = data_list[5]["#text"] if data_list else "Unknown"
                         ip_address = data_list[19]["#text"] if data_list else "Unknown"
                         source_type = 'local' if ip_address.startswith('127.') else 'remote'
+                        source_type = 'unkown' if ip_address.startswith('-') else 'remote'
                         #stores timestamp of ip addres and or adds a new ip if one apears
                         filtered_artifacts[ip_address].append(time_created)
 
@@ -148,3 +150,4 @@ def file_parser(evtx_path, attempts_output_path):
         exit()
     except Exception as e:
         logging.error(e)
+

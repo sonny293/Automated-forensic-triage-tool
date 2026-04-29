@@ -9,7 +9,7 @@ imports all other scripts and runs them in correct order
 from collector.event_logs import wev_run, file_path
 from collector.brow_hist import get_history, path, write_history
 from utils.logger import log_setup
-from parsers import path_find, file_parser, scoring, write_json_report, timer
+from parsers import path_find, file_parser, scoring, write_json_report, timer, search_history, brow_report
 
 
 #Standard
@@ -37,7 +37,7 @@ def main():
         rprint(f"[white on rgb(0,0,143)][bold]{banner}\n Automated Forensics Triage Tool                   \n[/white on rgb(0,0,143)][/bold][white on rgb(0,0,50)][italic] By Sonny Bowers & Jane Rewnwick                   \n[white on rgb(0,0,50)][italic]")
         while True:
             log_setup()
-            start = console.input("Scan Security Event Logs (1)\nScan Chrome Browser History (2)\n\nEnter: ")
+            start = console.input("\n\nScan Security Event Logs (1)\nScan Chrome Browser History (2)\n\nEnter: ")
             if start == '1':
                 try:
                     evtx_file = file_path()
@@ -123,6 +123,15 @@ def main():
                     results = get_history()
                     output_path = path()
                     write_history(results, output_path)
+                    paths = path_find()
+                    browser_path = paths[3]
+                    browser_output_path = paths[4]
+                    print(browser_path)
+
+                    keyword = input('\nWhat Keyword would you like to search for: ')
+                    results = search_history(str(browser_path), keyword)
+
+                    brow_report(results, browser_output_path)
                 except FileNotFoundError:
                     logging.error('History not found[')
                     results, output_path = [], '/tmp/history.json'

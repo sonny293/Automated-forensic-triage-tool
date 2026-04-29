@@ -7,6 +7,7 @@ from .parser import file_parser
 from .scoring import scoring
 from .report import write_json_report
 from .timer import timer
+from .brow_parse import webkit_time_to_iso, load_history, matches, normalize_entry, search_history, brow_report
 
 __all__ = ["path_find", "file_parser", "scoring", "write_json_report", "timer"]
 
